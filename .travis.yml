@@ -1,0 +1,27 @@
+sudo: required
+services:
+    - docker
+
+env:
+    global:
+        - GIT_SHA=$(git rev-parse HEAD) # Enviroment variable which holds the current git SHA
+        - CLOUDSDK_CORE_DISABLE_PROMPTS=1 # Do not ask for user input when installing google sdk
+
+before_script:
+    # All this scripts will run inside travis
+    # Install Google Cloud SDK
+    - curl https://sdk.cloud.google.com | bash > /dev/null;
+    - source $HOME/google-cloud-sdk/path.bash.inc # Source the path.bash.inc
+    - gcloud components update kubectl # Install/Update kubectl
+    - openssl aes-256-cbc -K $encrypted_ab40c3750b26_key -iv $encrypted_ab40c3750b26_iv -in thelab-240901-5411dd5351fb.json.enc -out thelab-240901-5411dd5351fb.json -d
+    - gcloud auth activate-service-account --key-file thelab-240901-5411dd5351fb.json # Authenticate to Google cloud. Similar to AWS IAM user we will use service account in GCP. With authentication google-sdk can use our GCP account
+    - gcloud config set project thelab # Your Project ID on GCP
+    - gcloud config set compute/zone asia-south1-a # Find this information on your Kubernetes cluster page on GCP
+    - gcloud container clusters get-credentials factorial-project-cluster # Name of your Kubernetes cluster
+    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin # Login to docker hub
+
+deploy:
+    provider: script
+    script: bash ./deploy.sh
+    on:
+        branch: main

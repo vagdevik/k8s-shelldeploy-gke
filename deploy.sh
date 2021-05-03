@@ -3,7 +3,7 @@
 
 GIT_SHA=$(git rev-parse HEAD)
 # Build static-website image
-docker build -t vagdevik/static-website-k8s:$GIT_SHA -f ./Dockerfile 
+docker build -t vagdevik/static-website-k8s:$GIT_SHA . 
 
 ### Push images
 
@@ -16,4 +16,4 @@ docker push vagdevik/static-website-k8s:$GIT_SHA
 kubectl apply -f .
 
 # Update react-client image
-kubectl set image deployments/static-web-deployment days-app-container=vagdevik/static-website-k8s:$GIT_SHA
+kubectl set image deployment.apps/static-web-deployment -n=sample days-app-container=vagdevik/static-website-k8s:$GIT_SHA

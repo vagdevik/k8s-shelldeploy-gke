@@ -6,7 +6,6 @@ env:
   global:
   - GIT_SHA=$(git rev-parse HEAD)
   - CLOUDSDK_CORE_DISABLE_PROMPTS=1
-
 before_install:
 - openssl aes-256-cbc -K $encrypted_2c6847602b1c_key -iv $encrypted_2c6847602b1c_iv
   -in thelab-240901-a3965d3603ea.json.enc -out thelab-240901-a3965d3603ea.json -d

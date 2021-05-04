@@ -5,8 +5,7 @@ metadata:
   namespace: sample
 spec:
   rules:
-    - host: minikube-example.com
-      http:
+    - http:
         paths:
           - path: /
             pathType: Prefix  

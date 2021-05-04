@@ -14,7 +14,7 @@ before_install:
 - gcloud auth activate-service-account --key-file thelab-240901-a3965d3603ea.json
 - gcloud config set project thelab
 - gcloud config set compute/zone asia-south1-a
-- gcloud container clusters get-credentials factorial-project-cluster
+- gcloud container clusters get-credentials my-cluster-1
 - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
 deploy:
   provider: script

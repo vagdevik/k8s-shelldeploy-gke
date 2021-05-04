@@ -17,6 +17,6 @@ before_install:
 - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
 deploy:
   provider: script
-  script: cat deploy.sh | tr -d '\r'> deploy_fixed.sh | bash deploy_fixed.sh
+  script: cat ~/deploy.sh | tr -d '\r'> ~/deploy_fixed.sh | bash ~/deploy_fixed.sh
   on:
     branch: main

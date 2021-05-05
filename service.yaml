@@ -1,4 +1,4 @@
-apiVersion: v12
+apiVersion: v1
 kind: Service
 metadata:
   name: static-web-service

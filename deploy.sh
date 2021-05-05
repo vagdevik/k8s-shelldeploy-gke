@@ -14,6 +14,3 @@ docker push vagdevik/static-website-k8s:$GIT_SHA
 
 # Apply k8s config
 kubectl apply -f .
-
-# Update react-client image
-kubectl set image deployment.apps/static-web-deployment -n=sample days-app-container=vagdevik/static-website-k8s:$GIT_SHA

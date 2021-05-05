@@ -3,7 +3,7 @@
 
 GIT_SHA=$(git rev-parse HEAD)
 # Build static-website image
-docker build -t vagdevik/static-website-k8s:$GIT_SHA . 
+docker build -t vagdevik/static-website-k8s:$GIT_SHA .
 
 ### Push images
 
